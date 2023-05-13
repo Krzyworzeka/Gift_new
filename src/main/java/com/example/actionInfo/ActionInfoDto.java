@@ -7,6 +7,7 @@ import javax.validation.constraints.NotBlank;
 
 public class ActionInfoDto {
     private Long id;
+
     private Long actionId;
     @NotBlank
     private String description;
