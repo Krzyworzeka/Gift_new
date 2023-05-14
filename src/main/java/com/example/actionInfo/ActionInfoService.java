@@ -23,7 +23,7 @@ public class ActionInfoService {
         return actionInfoMapper.mapToDto(actionInfoRepository.findAll());
     }
 
-    public ActionInfoDto addAction(@Valid ActionInfoDto dto){
+    public ActionInfoDto addActionInfo(@Valid ActionInfoDto dto){
         ActionInfo actionInfo = actionInfoMapper.mapToEntity(dto);
         Assert.isNull(actionInfo.getId(), "Id has to be null");
         actionInfoRepository.save(actionInfo);
