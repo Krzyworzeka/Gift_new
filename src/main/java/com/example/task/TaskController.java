@@ -1,6 +1,6 @@
 package com.example.task;
 
-import com.example.action.ActionDTO;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -29,6 +29,11 @@ public class TaskController {
         this.taskService = taskService;
     }
 
+    @Operation(summary = "Add new task", description = "Create task")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successful response",
+                    content = @Content(schema = @Schema(implementation = TaskDTO[].class)))
+    })
     @PostMapping
     public ResponseEntity<TaskDTO> addTask(@RequestBody @Valid TaskDTO dto) {
         TaskDTO taskDTO = taskService.addTask(dto);
@@ -50,12 +55,21 @@ public class TaskController {
             return ResponseEntity.ok(tasks);
         }
     }
-
+    @Operation(summary = "GUpdate task", description = "Update task")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successful response",
+                    content = @Content(schema = @Schema(implementation = TaskDTO[].class)))
+    })
     @PutMapping("/{id}")
     public ResponseEntity<TaskDTO> updateTask(@PathVariable Long id, @RequestBody @Valid TaskDTO taskDTO) {
         TaskDTO dto = taskService.updateTask(id, taskDTO);
         return ResponseEntity.ok(dto);
     }
+    @Operation(summary = "Drop task", description = "Drop task")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successful response",
+                    content = @Content(schema = @Schema(implementation = TaskDTO[].class)))
+    })
 
     @DeleteMapping("/{id}")
     public ResponseEntity deleteTask(@PathVariable Long id) {
@@ -63,5 +77,23 @@ public class TaskController {
         return ResponseEntity.noContent().build();
     }
 
+    @Operation(summary = "End flag", description = "End flag")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successful response",
+                    content = @Content(schema = @Schema(implementation = TaskDTO[].class)))
+    })
+    @GetMapping("done/{id}")
+    public ResponseEntity<Boolean> isActionDone(@PathVariable Long id) {
+            return ResponseEntity.ok(taskService.isActionDone(id));
+    }
 
+    @Operation(summary = "progressAction", description = "Return the percent complete of the task")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successful response",
+                    content = @Content(schema = @Schema(implementation = TaskDTO[].class)))
+    })
+    @GetMapping("progress/{id}")
+    public ResponseEntity<String> progressAction(@PathVariable Long id) {
+        return ResponseEntity.ok(taskService.progressAction(id));
+    }
 }

@@ -16,4 +16,39 @@ public class OpenAPIConfig {
                         .version("v1.1.1"));
     }
 
+//    @Bean
+//    public GroupedOpenApi actionApi(){
+//        return GroupedOpenApi
+//                .builder()
+//                .group("action")
+//                .packagesToScan("com.example.action")
+//                .build();
+//    }
+//
+//    @Bean
+//    public GroupedOpenApi actionInfoApi(){
+//        return GroupedOpenApi
+//                .builder()
+//                .group("actionInfo")
+//                .packagesToScan("com.example.actionInfo")
+//                .build();
+//    }
+//    @Bean
+//    public GroupedOpenApi userApi(){
+//        return GroupedOpenApi
+//                .builder()
+//                .group("user")
+//                .packagesToScan("com.example.user")
+//                .build();
+//    }
+//
+//    @Bean
+//    public GroupedOpenApi taskApi(){
+//        return GroupedOpenApi
+//                .builder()
+//                .group("task")
+//                .packagesToScan("com.example.task")
+//                .build();
+//    }
+
 }

@@ -1,6 +1,7 @@
 package com.example.task;
 
 import com.example.action.Action;
+import com.example.action.ActionDTO;
 import com.example.action.ActionRepository;
 import com.example.exception.IdMismatchException;
 import com.example.exception.ResourceNotFoundException;
@@ -31,6 +32,15 @@ public class TaskService {
         return taskMapper.mapToDto(taskRepository.findById(id).orElse(null));
     }
 
+    public List<TaskDTO> getByActionId(Long id) {
+        return taskMapper.mapToDto((taskRepository
+                .findAll()))
+                .stream()
+                .filter(a -> a.getActionId().equals(id))
+                .toList();
+    }
+
+
     public void deleteById(Long id) {
         taskRepository.deleteById(id);
     }
@@ -57,5 +67,25 @@ public class TaskService {
         entity.setAction(action);
         taskRepository.save(entity);
         return taskMapper.mapToDto(entity);
+    }
+
+    public String progressAction(Long id){
+        List<TaskDTO> taskDTOS = taskMapper.mapToDto((taskRepository
+                        .findAll()))
+                .stream()
+                .filter(a -> a.getActionId().equals(id))
+                .toList();
+        Double percent = (double) (taskDTOS.size() / (taskDTOS.stream().filter(a -> a.getStatus().equals(Boolean.TRUE)).toList().size()))*100;
+
+        return percent.toString();
+    }
+
+    public Boolean isActionDone(Long id) {
+        List<TaskDTO> taskDTOS = taskMapper.mapToDto((taskRepository
+                        .findAll()))
+                .stream()
+                .filter(a -> a.getActionId().equals(id))
+                .toList();
+        return (taskDTOS.size() == (taskDTOS.stream().filter(a -> a.getStatus().equals(Boolean.TRUE)).toList().size()));
     }
 }

@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 @Getter
@@ -16,6 +17,7 @@ public class ActionDTO {
 
     @Schema(description = "Action name", example = "Szlachetna paczka - biuro Lotników")
     @NotBlank
+    @Size(min=5)
     private String name;
     @Schema(description = "Organization name", example = "Szlachetna paczka")
     @NotBlank

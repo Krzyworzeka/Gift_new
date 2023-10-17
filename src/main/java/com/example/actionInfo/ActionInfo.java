@@ -5,6 +5,7 @@ import com.example.action.Action;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,5 +27,6 @@ public class ActionInfo {
     @NotBlank
     private Action action;
     @NotBlank
+    @Column(columnDefinition = "TEXT")
     private String description;
 }
